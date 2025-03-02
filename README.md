@@ -39,7 +39,6 @@ modern-woocommerce-cart-checkout/
 └── form-checkout.php 
 └── modern-woocommerce-cart-checkout.php
 
-
 ## Usage
 
 After activation, the plugin automatically replaces the default WooCommerce cart and checkout templates with its modern versions. No additional configuration is needed.
