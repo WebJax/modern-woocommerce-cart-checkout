@@ -95,42 +95,47 @@ class Modern_WooCommerce_Cart_Checkout {
     }
     
     public function update_cart_item_callback() {
-        check_ajax_referer('modern_wc_nonce', 'security');
-        
-        $cart_item_key = isset($_POST['cart_item_key']) ? sanitize_text_field($_POST['cart_item_key']) : '';
-        $quantity = isset($_POST['quantity']) && is_numeric($_POST['quantity']) ? intval($_POST['quantity']) : 1;
-        
-        if ($cart_item_key && $quantity >= 0) {
-            // Allow 0 for removal, otherwise ensure minimum is 1
-            $quantity = ($quantity === 0) ? 0 : max(1, $quantity);
-            $result = WC()->cart->set_quantity($cart_item_key, $quantity, false);
-            if ($result === false) {
-                $response = array(
-                    'success' => false,
-                    'message' => 'Failed to update cart quantity'
-                );
-                wp_send_json($response);
-            }
-            
-            // Update cart totals
-            WC()->cart->calculate_totals();
+    check_ajax_referer('modern_wc_nonce', 'security');
 
-            $response = array(
-                'success' => true,
-                'cart_total' => WC()->cart->get_cart_total(),
-                'cart_subtotal' => WC()->cart->get_cart_subtotal(),
-                'cart_tax' => WC()->cart->get_cart_contents_tax(),
-                'item_count' => WC()->cart->get_cart_contents_count()
-            );
-        } else {
+    $cart_item_key = isset($_POST['cart_item_key']) ? sanitize_text_field($_POST['cart_item_key']) : '';
+    $quantity = isset($_POST['quantity']) && is_numeric($_POST['quantity']) ? intval($_POST['quantity']) : 1;
+
+    if ($cart_item_key && $quantity >= 0) {
+        // Allow 0 for removal, otherwise ensure minimum is 1
+        $quantity = ($quantity === 0) ? 0 : max(1, $quantity);
+        $result = WC()->cart->set_quantity($cart_item_key, $quantity, false);
+        if ($result === false) {
             $response = array(
                 'success' => false,
-                'message' => 'Ugyldig forespørgsel'
+                'message' => 'Failed to update cart quantity'
             );
+            wp_send_json($response);
         }
-        
-        wp_send_json($response);
+
+        // Update cart totals
+        WC()->cart->calculate_totals();
+
+        // Get the cart item
+        $cart_item = WC()->cart->get_cart_item($cart_item_key);
+        $item_subtotal = isset($cart_item['line_subtotal']) ? wc_price($cart_item['line_subtotal']) : '';
+
+        $response = array(
+            'success' => true,
+            'cart_total' => WC()->cart->get_cart_total(),
+            'cart_subtotal' => WC()->cart->get_cart_subtotal(),
+            'cart_tax' => WC()->cart->get_cart_contents_tax(),
+            'item_count' => WC()->cart->get_cart_contents_count(),
+            'item_subtotal' => $item_subtotal
+        );
+    } else {
+        $response = array(
+            'success' => false,
+            'message' => 'Ugyldig forespørgsel'
+        );
     }
+
+    wp_send_json($response);
+}
 }
 
 // Start plugin
