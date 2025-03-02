@@ -85,17 +85,8 @@
                         }
                         
                         // Opdater sidepanel og totaler
-                        if (response.cart_total) {
-                            $('.modern-cart-totals').html(response.cart_total);
-                        }
-                        
-                        // Opdater subtotal og moms hvis de findes i svaret
-                        if (response.cart_subtotal) {
-                            $('.modern-cart-subtotal-value').html(response.cart_subtotal);
-                        }
-                        
-                        if (response.cart_tax) {
-                            $('.modern-cart-tax-value').html(response.cart_tax);
+                        if (response.cart_collaterals) {
+                            $('.modern-cart-totals').html(response.cart_collaterals);
                         }
                         
                         // Opdater header kurv indikator hvis den findes
