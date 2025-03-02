@@ -117,15 +117,21 @@ class Modern_WooCommerce_Cart_Checkout {
 
         // Get the cart item
         $cart_item = WC()->cart->get_cart_item($cart_item_key);
-        $item_subtotal = isset($cart_item['line_subtotal']) ? wc_price($cart_item['line_subtotal']) : '';
+        $_product = $cart_item['data'];
+
+        // Get item subtotal
+        $item_subtotal = apply_filters('woocommerce_cart_item_subtotal', WC()->cart->get_product_subtotal($_product, $cart_item['quantity']), $cart_item, $cart_item_key);
+
+        // Get cart collaterals output
+        ob_start();
+        do_action('woocommerce_cart_collaterals');
+        $collaterals_output = ob_get_clean();
 
         $response = array(
             'success' => true,
-            'cart_total' => WC()->cart->get_cart_total(),
-            'cart_subtotal' => WC()->cart->get_cart_subtotal(),
-            'cart_tax' => WC()->cart->get_cart_contents_tax(),
             'item_count' => WC()->cart->get_cart_contents_count(),
-            'item_subtotal' => $item_subtotal
+            'item_subtotal' => $item_subtotal,
+            'cart_collaterals' => $collaterals_output
         );
     } else {
         $response = array(
