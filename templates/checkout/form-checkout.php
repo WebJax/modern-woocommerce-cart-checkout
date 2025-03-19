@@ -100,8 +100,8 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
                             
                             <?php if (WC()->cart->needs_shipping() && WC()->cart->show_shipping()) : ?>
                                 <div class="modern-order-shipping">
-                                    <span><?php esc_html_e('Forsendelse', 'woocommerce'); ?></span>
-                                    <span><?php wc_cart_totals_shipping_html(); ?></span>
+                                    <span class="morden-order-shipping-title"><?php esc_html_e('Forsendelse', 'woocommerce'); ?></span>
+									<?php wc_cart_totals_shipping_html(); ?>
                                 </div>
                             <?php endif; ?>
                             

@@ -3,7 +3,7 @@
  * Plugin Name: Modern WooCommerce Cart & Checkout
  * Description: En moderne tilgang til WooCommerce cart og checkout oplevelsen
  * Version: 1.0.0
- * Author: JaxWeb
+ * Author: Din Navn
  */
 
 // Sørg for direkte adgang er blokeret

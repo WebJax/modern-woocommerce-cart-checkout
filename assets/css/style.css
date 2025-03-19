@@ -136,43 +136,95 @@
     align-items: center;
 }
 
+.modern-cart-item-price, .modern-cart-item-subtotal {
+    text-align: right;
+}
+
+.modern-cart-item-name {
+    font-weight: 600;
+}
+
 @media (max-width: 768px) {
-    .modern-cart-item-details {
-        grid-template-columns: 1fr;
+    .modern-cart-item-name { grid-area: name; display: flex; gap: 0px; font-size: 1.4rem; flex-direction: column; font-weight: 400; }
+    .modern-cart-item-price { grid-area: price; display: none }
+    .modern-cart-item-quantity { grid-area: quantity; }
+    .modern-cart-item-subtotal { grid-area: subtotal; }
+    .modern-cart-item-remove { grid-area: remove; }
+	
+	.modern-cart-item-details {
         grid-template-areas:
-            "name"
-            "price"
-            "quantity"
-            "subtotal"
-            "remove";
+            "name name remove"
+            "quantity subtotal remove";
+		grid-template-columns: inherit;
         gap: 0.5rem;
     }
 
     .modern-cart-header {
         display: none;
     }
+	
+	.modern-cart-items {
+		padding: .2rem;
+	}
+	
+	.product-variations {
+	    line-height: .5;
+    	margin-bottom: 1rem;
+	    font-size: 1.3rem;
+	}
+	
+	.modern-cart-item-subtotal {
+		text-align: right;
+	}
+	
+	.modern-cart-item-subtotal bdi {
+    	font-size: 1.7rem;
+	}
 
-    .modern-cart-item-details > div::before {
-        content: attr(data-label);
-        font-weight: 600;
-        display: inline-block;
-        width: 80px;
-    }
+	.woocommerce.wp-block-group.alignwide {
+		width: 100%;
+		grid-template-columns: auto !important;
+	}
 
-    .modern-cart-item-name { grid-area: name; }
-    .modern-cart-item-price { grid-area: price; }
-    .modern-cart-item-quantity { grid-area: quantity; }
-    .modern-cart-item-subtotal { grid-area: subtotal; }
-    .modern-cart-item-remove { grid-area: remove; }
-}
+	.modern-cart-wrapper {
+		padding: 0;
+	}
 
-.modern-cart-item-name {
-    /* grid-area: name; */
-    font-weight: 600;
-}
+	table.shop_table.shop_table_responsive tr {
+		display: flex;
+		justify-content: space-between;
+	}
 
-.modern-cart-item-price, .modern-cart-item-subtotal {
-    text-align: center;
+	tr.woocommerce-shipping-totals.shipping th {
+		display: none;
+	}
+
+	.modern-cart-totals .cart_totals {
+		padding: 12px!important;
+	}
+	
+	ul#shipping_method label {
+		font-size: 1.4rem;
+		margin-bottom: 0;
+		grid-area: label;
+		text-align: right;
+		margin-left: 10px;
+	}
+
+	.shipping_company_required, .shipping_pickup_cart {
+		font-style: italic;
+		font-size: 1.3rem;
+		line-height: .6;
+		grid-area: required;
+	}
+
+	ul#shipping_method bdi {
+		font-size: 1.6rem;
+	}
+
+	tr.woocommerce-shipping-totals.shipping td {
+		padding: 5px 0;
+	}
 }
 
 .modern-cart-item-quantity {
@@ -182,14 +234,13 @@
 }
 
 .modern-cart-item-subtotal {
-    /* grid-area: subtotal; */
     font-weight: 600;
 }
 
 .modern-cart-item-remove {
-    /* grid-area: remove; */
     display: flex;
     align-items: center;
+	padding-right: 5px;
 }
 
 .modern-quantity-input {
@@ -269,15 +320,6 @@ input[type=number].modern-quantity-input {
     gap: 1rem;
 }
 
-.modern-cart-sidebar {
-    background-color: var(--mwc-background);
-    border-radius: var(--mwc-radius);
-    box-shadow: var(--mwc-shadow);
-    padding: 1.5rem;
-    text-align: right;
-    width: 33%;
-}
-
 .modern-cart-totals table {
     width: 100%;
 }
@@ -288,6 +330,24 @@ input[type=number].modern-quantity-input {
 
 .modern-cart-totals h2 {
     display: none;
+}
+
+.modern-cart-totals {
+    display: flex;
+    width: 100%;
+}
+
+.modern-cart-sidebar {
+    width: 100%;
+}
+
+ul#shipping_method input[type="radio"] {
+    margin: 0;
+    grid-area: radio;
+}
+
+.modern-cart-totals .cart_totals {
+	min-width: 100%;
 }
 
 .modern-cart-checkout-btn-wrapper {
@@ -334,13 +394,22 @@ input[type=number].modern-quantity-input {
     border-radius: var(--mwc-radius);
     box-shadow: var(--mwc-shadow);
     padding: 1.5rem;
+	width: 600px;
+}
+
+.modern-checkout-form-container {
+    width: 300px;
+}
+
+.modern-checkout-form-container > h3 {
+	display: none;
 }
 
 .modern-checkout-form h3,
 .modern-checkout-sidebar h3 {
     margin-top: 0;
     margin-bottom: 1.5rem;
-    font-size: 1.25rem;
+    font-size: 1.9rem;
     font-weight: 600;
     border-bottom: 1px solid var(--mwc-border);
     padding-bottom: 0.75rem;
@@ -356,8 +425,11 @@ input[type=number].modern-quantity-input {
 
 .modern-checkout-form label {
     display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
+    margin-bottom: 0rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+	white-space: normal !important;
 }
 
 .modern-checkout-form input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]),
@@ -368,6 +440,7 @@ input[type=number].modern-quantity-input {
     border: 1px solid var(--mwc-border);
     border-radius: var(--mwc-radius);
     background-color: var(--mwc-background);
+    margin-bottom: 0;
 }
 
 .modern-checkout-form input:focus,
@@ -382,6 +455,28 @@ input[type=number].modern-quantity-input {
     color: var(--mwc-error);
 }
 
+input[type="radio"] {
+    appearance: none; /* Fjerner standardstil */
+    width: 20px;
+    height: 20px;
+    border: 2px solid #333;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+}
+
+input[type="radio"]:checked::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background: #333;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 /* Order Summary Styles */
 .modern-order-summary {
     margin-bottom: 2rem;
@@ -393,7 +488,10 @@ input[type=number].modern-quantity-input {
 
 .modern-order-item {
     display: grid;
-    grid-template-columns: 64px 1fr auto;
+    grid-template-areas:
+        "image details"
+        "image price";
+    grid-template-columns: 64px auto;
     gap: 1rem;
     padding: 0.75rem 0;
     border-bottom: 1px solid var(--mwc-border);
@@ -405,6 +503,7 @@ input[type=number].modern-quantity-input {
 
 .modern-order-item-image {
     position: relative;
+    grid-area: image;
 }
 
 .modern-order-item-image img {
@@ -415,7 +514,7 @@ input[type=number].modern-quantity-input {
     position: absolute;
     top: -8px;
     right: -8px;
-    background-color: var(--mwc-error);
+    background-color: #ff6b6b;
     color: white;
     width: 24px;
     height: 24px;
@@ -423,8 +522,8 @@ input[type=number].modern-quantity-input {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.75rem;
-    font-weight: 600;
+    font-size: 1.1rem;
+    font-weight: 900;
 }
 
 .modern-order-item-name {
@@ -434,6 +533,8 @@ input[type=number].modern-quantity-input {
 
 .modern-order-item-price {
     font-weight: 600;
+    grid-area: price;
+    text-align: right;
 }
 
 .modern-order-totals > div {
@@ -444,10 +545,18 @@ input[type=number].modern-quantity-input {
 
 .modern-order-total {
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 1.8rem;
     border-top: 1px solid var(--mwc-border);
     padding-top: 1rem !important;
     margin-top: 0.5rem;
+}
+
+span.morden-order-shipping-title {
+    display: none;
+}
+
+.modern-order-totals div.modern-order-shipping {
+    display: flex;
 }
 
 /* Payment Methods */
@@ -528,6 +637,66 @@ input[type=number].modern-quantity-input {
     text-align: center;
 }
 
+tr.woocommerce-shipping-totals.shipping th {color: transparent;}
+
+ul#shipping_method {
+    list-style: none;
+}
+
+ul#shipping_method li {
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto 20px;
+    grid-template-areas:
+        "label radio"
+        "required radio";
+    margin: 1rem 0;
+	align-items: center;
+}
+
+.shipmondo-original {
+    grid-area: required;
+    margin-inline: 10px;
+}
+
+.wc-proceed-to-checkout {
+    text-align: end;
+}
+
+.modern-cart-totals a.checkout-button.button.alt.wc-forward {
+    line-height: 2;
+}
+
+.woocommerce-privacy-policy-text p {
+    white-space: normal!important;
+}
+
+ul.modern-payment-method-list.wc_payment_methods.payment_methods.methods {
+    list-style: none;
+}
+
+.modern-order-totals bdi, .modern-order-totals span, .modern-order-totals .woocommerce-Price-amount.amount {
+    font-size: 1.8rem;
+}
+
+.modern-order-items bdi {
+    font-size: 1.6rem;
+}
+
+ul#shipping_method label {
+    margin-right: 10px;
+    margin-bottom: 0;
+}
+
+.shipping_pickup_cart {
+    margin-right: 10px;
+    grid-area: required;
+}
+
+ul#shipping_method li br {
+    display: none;
+}
+
 /* Responsive Design */
 @media (max-width: 767px) {
     .modern-cart-item-details,
@@ -537,6 +706,7 @@ input[type=number].modern-quantity-input {
     
     .modern-cart-actions {
         flex-direction: column;
+		padding-inline: 60px;
     }
     
     .modern-cart-actions button {
@@ -545,5 +715,62 @@ input[type=number].modern-quantity-input {
     
     .modern-checkout-sidebar {
         margin-top: 2rem;
+		width: auto;
     }
+	
+	.wc-proceed-to-checkout {
+		text-align: center;
+	}
+	
+	.modern-order-shipping .woocommerce-Price-amount.amount {
+		display: inline-block;
+	}
+
+	input[type="checkbox"] {
+		top: 3px;
+		position: relative;
+		margin-bottom: 0;
+	}
+
+	.modern-order-item-details {
+		font-size: 1.4rem;
+		margin: 0 0 0 2rem;
+		grid-area: details;
+	}
+
+	.modern-order-item-details .modern-order-item-name {
+		font-weight: 700;
+		margin-bottom: 0;
+	}
+	
+	dl.variation dd {
+		margin-inline-start: 4px;
+	}
+
+	ul#shipping_method label, ul#shipping_method bdi {
+		font-size: 1.2rem;
+		font-weight: 900;
+	}
+	
+	.woocommerce-terms-and-conditions-wrapper p.form-row.validate-required label span.woocommerce-terms-and-conditions-checkbox-text {
+    	white-space: normal !important;
+    	padding: 2px;
+ 	}
+	
+	span.woocommerce-terms-and-conditions-checkbox-text a {
+    	padding-left: 25px;
+	}
+	
+	#shipping_method span.woocommerce-Price-currencySymbol {
+    	font-size: 1.2rem;
+	}
+	
+	.modern-order-totals div.modern-order-shipping {
+    	flex-direction: column;
+	}
+	
+	section.container.sideindhold.wctemplate.withcrumb .offset-by-two.column.eight.columns {
+    	margin: 0;
+	    width: 100%;
+	}
 }
