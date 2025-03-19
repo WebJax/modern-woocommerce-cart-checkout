@@ -414,6 +414,7 @@ ul#shipping_method input[type="radio"] {
     font-weight: 600;
     border-bottom: 1px solid var(--mwc-border);
     padding-bottom: 0.75rem;
+    letter-spacing: normal;
 }
 
 .modern-customer-details {
