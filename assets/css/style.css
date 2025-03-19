@@ -29,6 +29,7 @@
     background-color: var(--color-dark-variant);
     border-radius: 4px;
     float: none;
+	text-transform: none;
 }
 
 .modern-button:hover {
@@ -463,6 +464,7 @@ input[type="radio"] {
     border-radius: 50%;
     display: inline-block;
     position: relative;
+	margin: 0;
 }
 
 input[type="radio"]:checked::before {
@@ -475,6 +477,35 @@ input[type="radio"]:checked::before {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+input[type="checkbox"] {
+    appearance: none; /* Fjerner standard checkbox */
+	min-width: 24px;
+    width: 24px;
+    height: 24px;
+    border: 2px solid #333;
+    border-radius: 4px; /* Giver et let afrundet look */
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+	margin: 0;
+}
+
+input[type="checkbox"]:checked::before {
+    content: "✔"; /* Tilføjer et tjekmærke */
+    font-size: 18px;
+    color: #333;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+label.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 /* Order Summary Styles */
@@ -541,6 +572,7 @@ input[type="radio"]:checked::before {
     display: flex;
     justify-content: space-between;
     padding: 0.5rem 0;
+	border-top: 1px solid var(--mwc-border);
 }
 
 .modern-order-total {
@@ -549,6 +581,7 @@ input[type="radio"]:checked::before {
     border-top: 1px solid var(--mwc-border);
     padding-top: 1rem !important;
     margin-top: 0.5rem;
+	border-bottom: 3px double var(--mwc-border);
 }
 
 span.morden-order-shipping-title {
@@ -562,6 +595,22 @@ span.morden-order-shipping-title {
 /* Payment Methods */
 .modern-payment-methods {
     margin-bottom: 1.5rem;
+}
+
+li.wc_payment_method {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+li.wc_payment_method label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+li.wc_payment_method label img {
+    max-height: 25px!Important;
 }
 
 .modern-payment-method-list {
@@ -599,10 +648,12 @@ span.morden-order-shipping-title {
     margin-top: 1.5rem;
 }
 
-.modern-place-order .order-button {
-    width: 100%;
-    font-size: 1.1rem;
-    padding: 1rem;
+.form-row.place-order {
+    text-align: right;
+}
+
+.woocommerce-terms-and-conditions-wrapper {
+    text-align: left;
 }
 
 /* Form Validering */
@@ -665,6 +716,7 @@ ul#shipping_method li {
 
 .modern-cart-totals a.checkout-button.button.alt.wc-forward {
     line-height: 2;
+	text-transform: none;
 }
 
 .woocommerce-privacy-policy-text p {
@@ -673,6 +725,7 @@ ul#shipping_method li {
 
 ul.modern-payment-method-list.wc_payment_methods.payment_methods.methods {
     list-style: none;
+	padding: 0
 }
 
 .modern-order-totals bdi, .modern-order-totals span, .modern-order-totals .woocommerce-Price-amount.amount {
