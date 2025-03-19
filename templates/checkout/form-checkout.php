@@ -143,6 +143,7 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
                         <?php if (WC()->cart->needs_payment()) : ?>
                             <ul class="modern-payment-method-list wc_payment_methods payment_methods methods">
                                 <?php
+                                $available_gateways = WC()->payment_gateways()->get_available_payment_gateways();
                                 if (!empty($available_gateways)) {
                                     foreach ($available_gateways as $gateway) {
                                         wc_get_template('checkout/payment-method.php', array('gateway' => $gateway));
