@@ -66,7 +66,7 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
                                             <div class="modern-order-item-name"><?php echo $_product->get_title(); ?></div>
                                             <?php
                                             // Display variation data
-                                            if ($_product->is_type('variation')) {
+                                            if ($_product->is_type('variation') && $cart_item['hide_variation_data'] !== true) {
                                                 echo wc_get_formatted_variation($_product);
                                             }
                                             // Display all cart item data
